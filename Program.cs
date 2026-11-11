@@ -23,8 +23,8 @@ class Program
         while (rodando)
         {
             Console.WriteLine("\n--- Menu ---");
-            Console.WriteLine("1 - Rota de menor custo entre dois hubs");
-            Console.WriteLine("2 - Menores custos a partir de um hub");
+            Console.WriteLine("1 - Menor custo entre dois vértices");
+            Console.WriteLine("2 - Menores custos a partir de um vértice");
             Console.WriteLine("3 - Carregar arquivo DIMACS");
             Console.WriteLine("0 - Sair");
             Console.Write("\nEscolha: ");
@@ -68,7 +68,7 @@ class Program
         grafo.AdicionarAresta(4, 6, 5);
         grafo.AdicionarAresta(5, 6, 4);
 
-        Console.WriteLine("Grafo de exemplo carregado (6 hubs, 11 rotas).");
+        Console.WriteLine("Grafo de exemplo carregado (6 vértices, 11 arestas).");
         grafo.ExibirEstrutura();
     }
 
@@ -94,8 +94,8 @@ class Program
 
     static void MenuRota()
     {
-        int origem = LerVertice("Hub de origem: ");
-        int destino = LerVertice("Hub de destino: ");
+        int origem = LerVertice("Vértice de origem: ");
+        int destino = LerVertice("Vértice de destino: ");
 
         try
         {
@@ -106,7 +106,7 @@ class Program
             Console.WriteLine();
             if (custo == -1)
             {
-                Console.WriteLine("Não existe caminho entre os hubs informados.");
+                Console.WriteLine("Não existe caminho entre os vértices informados.");
                 return;
             }
 
@@ -124,7 +124,7 @@ class Program
 
     static void MenuFonteUnica()
     {
-        int origem = LerVertice("Hub de origem: ");
+        int origem = LerVertice("Vértice de origem: ");
 
         try
         {
@@ -133,7 +133,7 @@ class Program
             inicio.Stop();
 
             Console.WriteLine();
-            Console.WriteLine($"Menores custos a partir do hub {origem}:");
+            Console.WriteLine($"Menores custos a partir do vértice {origem}:");
             for (int v = 1; v <= grafo.QuantidadeVertices; v++)
             {
                 string valor = dist[v] == int.MaxValue ? "inalcançável" : dist[v].ToString();

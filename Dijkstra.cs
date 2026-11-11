@@ -16,10 +16,10 @@ public static class Dijkstra
         int n = grafo.QuantidadeVertices;
 
         if (origem < 1 || origem > n)
-            throw new ArgumentOutOfRangeException(nameof(origem), $"Hub de origem inválido. Informe um valor entre 1 e {n}.");
+            throw new ArgumentOutOfRangeException(nameof(origem), $"Vértice de origem inválido. Informe um valor entre 1 e {n}.");
 
         if (destino < 1 || destino > n)
-            throw new ArgumentOutOfRangeException(nameof(destino), $"Hub de destino inválido. Informe um valor entre 1 e {n}.");
+            throw new ArgumentOutOfRangeException(nameof(destino), $"Vértice de destino inválido. Informe um valor entre 1 e {n}.");
 
         int[] dist = new int[n + 1];
         int[] anterior = new int[n + 1];
@@ -85,7 +85,7 @@ public static class Dijkstra
         int n = grafo.QuantidadeVertices;
 
         if (origem < 1 || origem > n)
-            throw new ArgumentOutOfRangeException(nameof(origem), $"Hub de origem inválido. Informe um valor entre 1 e {n}.");
+            throw new ArgumentOutOfRangeException(nameof(origem), $"Vértice de origem inválido. Informe um valor entre 1 e {n}.");
 
         int[] dist = new int[n + 1];
         Array.Fill(dist, int.MaxValue);

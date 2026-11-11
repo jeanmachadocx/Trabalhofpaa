@@ -41,8 +41,8 @@ dotnet bin/Release/net8.0/DijkstraApp.dll grafos_dimacs/grafo04.dimacs
 ## Menu
 
 ```
-1 - Rota de menor custo entre dois hubs
-2 - Menores custos a partir de um hub
+1 - Menor custo entre dois vértices
+2 - Menores custos a partir de um vértice
 3 - Carregar arquivo DIMACS
 0 - Sair
 ```
@@ -54,9 +54,9 @@ caminho, relaxamentos bem-sucedidos e tempo de execução.
 
 | arquivo | vértices | arestas | para que serve |
 |---|---|---|---|
-| `exemplo.dimacs` | 5 | 9 | rota 1→5: o caminho 1-2-3-4-5 custa 4 e vence o direto (10) |
+| `exemplo.dimacs` | 5 | 9 | caminho 1→5: o caminho 1-2-3-4-5 custa 4 e vence o direto (10) |
 | `medio.dimacs` | 12 | 22 | grafo conectado, pesos 1 a 20 |
-| `sem_caminho.dimacs` | 8 | 8 | hubs 1-4 e 5-8 separados; 1→8 não tem rota |
+| `sem_caminho.dimacs` | 8 | 8 | vértices 1-4 e 5-8 separados; 1→8 não tem rota |
 | `grande.dimacs` | 300 | 1200 | teste de desempenho |
 | `grafo01` a `grafo07` | 6 a 200 | 12 a 400 | instâncias originais do projeto de grafos |
 
