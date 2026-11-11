@@ -1,6 +1,6 @@
 # Trabalho Prático de FPAA - Caminho Mínimo com Dijkstra
 
-Implementação isolada do algoritmo de Dijkstra (técnica gulosa) aplicada a
+Implementação do algoritmo de Dijkstra (técnica gulosa) aplicada a
 roteamento de menor custo em uma rede logística. Projeto em C# / .NET 8,
 sem dependências externas.
 
