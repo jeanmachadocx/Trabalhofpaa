@@ -1,4 +1,4 @@
-# medio: 12 hubs, 22 rotas, grafo conectado
+# medio: 12 vértices, 22 arestas, grafo conectado
 12 22
 1 2 5
 2 3 2

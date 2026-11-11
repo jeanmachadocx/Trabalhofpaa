@@ -1,4 +1,4 @@
-# sem caminho: hubs 1-4 e 5-8 em componentes separados; 1->8 nao tem rota
+# sem_caminho: vértices 1-4 e 5-8 em componentes separados; de 1 a 8 não há rota
 8 8
 1 2 4
 2 3 2

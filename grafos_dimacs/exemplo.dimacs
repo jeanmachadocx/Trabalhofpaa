@@ -1,4 +1,4 @@
-# exemplo: 5 hubs, rota 1->5; o caminho 1-2-3-4-5 custa 4 e vence o direto (10)
+# exemplo: 5 vértices, 9 arestas; de 1 a 5 o caminho 1-2-3-4-5 custa 4 e vence o direto (10)
 5 9
 1 2 1
 1 3 6

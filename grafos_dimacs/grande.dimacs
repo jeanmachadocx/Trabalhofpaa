@@ -1,4 +1,4 @@
-# grande: 300 hubs, 1200 rotas, para teste de desempenho
+# grande: 300 vértices, 1200 arestas, teste de desempenho
 300 1200
 1 2 72
 2 3 58
