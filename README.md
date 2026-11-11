@@ -8,7 +8,7 @@ sem dependências externas.
 
 ```
 DijkstraApp.csproj    Projeto console (.NET 8)
-Aresta.cs             Aresta do grafo (origem, destino, peso, capacidade)
+Aresta.cs             Aresta do grafo (origem, destino, peso)
 Grafo.cs              Grafo dirigido com lista de adjacência
 LeitorDIMACS.cs       Leitura de arquivos de entrada
 Dijkstra.cs           Algoritmo de Dijkstra (caminho mínimo)
@@ -18,25 +18,36 @@ grafos_dimacs/        Instâncias de teste
 
 ## Como executar
 
-Requisito: .NET SDK 8.0 ou superior (`dotnet --version`).
+Requisito: .NET SDK 8.0 ou superior. Confira com `dotnet --list-sdks`.
 
 ```bash
 dotnet run
 ```
 
 O programa inicia com um grafo de exemplo de 6 vértices e 11 arestas. Para
-carregar uma instância DIMACS direto na inicialização:
+carregar uma instância DIMACS na inicialização:
 
 ```bash
-dotnet run -- grafos_dimacs/grafo01.dimacs
+dotnet run -- grafos_dimacs/exemplo.dimacs
 ```
 
-Também é possível compilar e executar o binário:
+O `--` separa os argumentos do `dotnet run` dos argumentos do programa.
+Também dá para compilar e executar o binário:
 
 ```bash
 dotnet build -c Release
-dotnet bin/Release/net8.0/DijkstraApp.dll grafos_dimacs/grafo04.dimacs
+dotnet bin/Release/net8.0/DijkstraApp.dll grafos_dimacs/grande.dimacs
 ```
+
+Sem o SDK e sem permissão de administrador, a instalação por usuário é:
+
+```powershell
+Invoke-WebRequest https://dot.net/v1/dotnet-install.ps1 -OutFile "$env:TEMP\di.ps1"
+powershell -ExecutionPolicy Bypass -File "$env:TEMP\di.ps1" -Channel 8.0
+```
+
+O SDK fica em `%LOCALAPPDATA%\Microsoft\dotnet`; essa pasta precisa vir antes
+de qualquer outro `dotnet` no PATH.
 
 ## Menu
 
@@ -54,8 +65,8 @@ caminho, relaxamentos bem-sucedidos e tempo de execução.
 
 | arquivo | vértices | arestas | para que serve |
 |---|---|---|---|
-| `exemplo.dimacs` | 5 | 9 | caminho 1→5: o caminho 1-2-3-4-5 custa 4 e vence o direto (10) |
-| `medio.dimacs` | 12 | 22 | grafo conectado, pesos 1 a 20 |
+| `exemplo.dimacs` | 5 | 9 | caminho 1→5: 1-2-3-4-5 custa 4 e vence o direto (10) |
+| `medio.dimacs` | 12 | 22 | grafo conectado, pesos de 1 a 20 |
 | `sem_caminho.dimacs` | 8 | 8 | vértices 1-4 e 5-8 separados; 1→8 não tem rota |
 | `grande.dimacs` | 300 | 1200 | teste de desempenho |
 | `grafo01` a `grafo07` | 6 a 200 | 12 a 400 | instâncias originais do projeto de grafos |
@@ -63,18 +74,34 @@ caminho, relaxamentos bem-sucedidos e tempo de execução.
 ## Formato de entrada
 
 Primeira linha com a quantidade de vértices e de arestas. Cada linha seguinte
-representa uma aresta no formato `origem destino peso [capacidade]`, com
-vértices numerados de 1 a N. Linhas iniciadas por `#` ou `c` são ignoradas.
+representa uma aresta no formato `origem destino peso`, com vértices numerados
+de 1 a N. Linhas iniciadas por `#` ou `c` são ignoradas.
 
 ```
-6 12
-1 2 2 10
-1 3 3 7
-1 4 1 8
+5 9
+1 2 1
+1 3 6
+2 3 1
 ```
 
-As instâncias vieram de um projeto maior e trazem uma quarta coluna
+As instâncias herdadas do projeto original trazem uma quarta coluna
 (capacidade). Ela é ignorada: aqui o que importa é o peso da aresta.
+
+## Resultados obtidos
+
+```
+dotnet run -- grafos_dimacs/exemplo.dimacs      origem 1, destino 5
+Custo total: 4
+Caminho: 1 -> 2 -> 3 -> 4 -> 5
+Relaxamentos bem-sucedidos: 9
+
+dotnet run -- grafos_dimacs/sem_caminho.dimacs  origem 1, destino 8
+Não existe caminho entre os vértices informados.
+
+dotnet run -- grafos_dimacs/grande.dimacs       origem 1, destino 300
+Custo total: 189
+Tempo: 6,852 ms
+```
 
 ## Complexidade
 
@@ -86,10 +113,10 @@ da aresta.
 ## Verificação
 
 As distâncias produzidas foram comparadas com uma implementação de referência
-independente em 189 casos (todas as origens dos sete arquivos em
+independente em 514 casos (todas as origens das onze instâncias em
 `grafos_dimacs`), sem divergências. O modo de conferência imprime as distâncias
-a partir de um vértice:
+a partir de um vértice, uma por linha, com `-1` para inalcançável:
 
 ```bash
-dotnet bin/Release/net8.0/DijkstraApp.dll --dist grafos_dimacs/grafo07.dimacs 1
+dotnet bin/Release/net8.0/DijkstraApp.dll --dist grafos_dimacs/grande.dimacs 1
 ```
